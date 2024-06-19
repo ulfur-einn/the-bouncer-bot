@@ -1,0 +1,26 @@
+cabal-version: 3.8
+name: the-bouncer
+version: 0.1
+
+-- executable test-client
+--     ghc-options: -Wall
+--     build-depends: base, http-conduit, aeson, bytestring
+--     main-is: client.hs
+
+-- executable test-server
+--     ghc-options: -Wall
+--     build-depends: base, servant, servant-server, aeson, warp, wai-logger
+--     main-is: server.hs
+
+executable TheBouncer
+    default-extensions: OverloadedStrings
+    ghc-options: -Wall
+    build-depends: base, text, discord-haskell == 1.17.*, aeson, time, directory,
+        http-conduit, http-types, base64-bytestring, crypton, bytestring, memory,
+        containers, async, mtl, unliftio
+    main-is: Main.hs
+    hs-source-dirs: source
+    other-modules: VerifyDOB User Tools RemoveUser ReadUser EventHandle Config Fix
+        VRC.Login VRC.Logout VRC.Group.InviteToGroup VRC.Group.GetGroup 
+        VRC.Group.Update VRC.Group.RemoveFromGroup VRC.Group.GetInstance
+        Channel.Channels
