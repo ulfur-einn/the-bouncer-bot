@@ -9,3 +9,5 @@ refactoring:
     Clean up cabal.
 
 versions in cabal
+read-me.md
+empty config.json
