@@ -6,8 +6,6 @@ getGroupInstances, getGroup, doesnt check for a bad response code (error)
 refactoring:
     Does GetGroup.hs/GetInstance.hs/Logout.hs/RemoveFromGroup.hs/
     ReadUser.hs/RemoveUser.hs/User.hs/Config.hs need to exist separately?
-    Clean up cabal.
 
 versions in cabal
-read-me.md
 empty config.json
