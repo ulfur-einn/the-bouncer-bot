@@ -20,14 +20,9 @@ jobs:
       with:
         ghc-version: '9.4.8'
         cabal-version: '3.8'
-    - uses: comnoco/create-release-action@v2.0.5
-      env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - uses: cachix/haskell-release-action@v1
       with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          draft: false
-          prerelease: false
+        hackage-token: "${{ secrets.HACKAGE_AUTH_TOKEN }}"
     - name: Install dependencies
       run: |
         cabal update
