@@ -20,6 +20,7 @@ jobs:
       with:
         ghc-version: '9.4.8'
         cabal-version: '3.8'
+    - uses: comnoco/create-release-action@v2.0.5
 
     - name: Install dependencies
       run: |
