@@ -1,7 +1,7 @@
 {-# LANGUAGE ScopedTypeVariables #-}
 {-# OPTIONS_GHC -Wno-name-shadowing #-}
 
-module VRC.Login (loginInitial, refreshCookies) where
+module VRC.Login (loginInitial, refreshCookies, logout) where
 
 import Network.HTTP.Simple
 import Network.HTTP.Types
@@ -20,6 +20,7 @@ import Network.HTTP.Conduit
 import Data.Time
 import Data.List
 import Text.Printf
+import Tools
 
 loginBasic :: Config -> Maybe Cookie -> IO Cookie
 loginBasic config cookie = case cookie of
@@ -112,3 +113,11 @@ isTwoFactorAuth cookie = cookie_name cookie == "twoFactorAuth"
 
 isAuth :: Cookie -> Bool
 isAuth cookie = cookie_name cookie == "auth"
+
+logout :: Config -> (Cookie, Cookie) -> IO Reply
+logout config (auth, twoFactorAuth)= do
+    request <- parseRequest "PUT https://api.vrchat.cloud/api/1/logout"
+    let agentReq = addRequestHeader "User-Agent" (encodeUtf8 $ userAgent config) request
+    let cookieReq = agentReq {cookieJar = Just $ createCookieJar [auth,twoFactorAuth]}
+    response <- httpJSON cookieReq
+    return (responseBody response)

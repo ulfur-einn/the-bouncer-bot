@@ -2,10 +2,3 @@ add a happy birthday response for users
 
 getGroupInstances, getGroup, doesnt check for a bad response code (error)
 /update returns nothing on fail
-
-refactoring:
-    Does GetGroup.hs/GetInstance.hs/Logout.hs/RemoveFromGroup.hs/
-    ReadUser.hs/RemoveUser.hs/User.hs/Config.hs need to exist separately?
-
-versions in cabal
-empty config.json

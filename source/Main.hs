@@ -8,13 +8,11 @@ import qualified Discord.Types as DT
 import Data.Aeson
 import VerifyDOB
 import Tools
-import RemoveUser
-import ReadUser
+import User
 import EventHandle
 import Config
 import VRC.Group.InviteToGroup
 import VRC.Login
-import VRC.Logout
 import Data.IORef
 import VRC.Group.Update
 import qualified Data.Map as Map

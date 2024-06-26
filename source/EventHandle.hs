@@ -5,8 +5,7 @@ import Discord.Interactions
 import qualified Discord.Types as DT
 import Discord
 import VerifyDOB
-import RemoveUser
-import ReadUser
+import User
 import VRC.Group.InviteToGroup
 import Network.HTTP.Conduit
 import Config
@@ -14,7 +13,7 @@ import Data.IORef
 import Control.Monad.IO.Class
 import VRC.Group.Update
 import qualified Data.Map as Map
-import VRC.Group.RemoveFromGroup
+import VRC.Group.Group
 import Fix
 
 

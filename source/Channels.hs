@@ -1,4 +1,4 @@
-module Channel.Channels (getChannels, makeChannel, deleteChannel) where
+module Channels (getChannels, makeChannel, deleteChannel) where
 
 import Discord.Requests
 import Discord

@@ -1,15 +1,33 @@
-module VRC.Group.RemoveFromGroup (removeFromGroup) where
+{-# LANGUAGE ScopedTypeVariables #-}
 
+module VRC.Group.Group (getGroup, getGroupInstances, removeFromGroup) where
+
+import Network.HTTP.Simple
+import qualified Data.Text as T
+import Data.List
+import Network.HTTP.Conduit
+import Tools
+import Config
 import Discord
 import qualified Discord.Types as DT
-import Network.HTTP.Conduit
+import qualified Data.Map as Map
+import Control.Monad.IO.Class
 import User
 import Data.Aeson hiding (Success,Error)
-import Control.Monad.IO.Class
-import Data.List
-import Config
-import qualified Data.Text as T
-import Tools
+
+getGroup :: Config -> Cookie -> T.Text -> IO Group
+getGroup config auth grpid = do
+    request <- parseRequest ("GET https://api.vrchat.cloud/api/1/groups/" <> T.unpack grpid)
+    response <- vrcSendRequestJSON config request auth
+    return (responseBody response)
+
+getGroupInstances :: DT.GuildId -> Config -> Cookie -> IO [Instance]
+getGroupInstances guildId config auth = do
+    let maybeserver = Map.lookup guildId (servers config)
+    server <- maybe (fail "No server in getGroupInstance.") return maybeserver
+    request <- parseRequest ("GET https://api.vrchat.cloud/api/1/users/" <> T.unpack (usrId config) <> "/instances/groups/" <> T.unpack (vrcGroupId server))
+    response :: Response GroupInstancesReply <- vrcSendRequestJSON config request auth
+    return (instances (responseBody response))
 
 removeFromGroup :: Config -> Server -> DT.GuildId -> DT.UserId -> Cookie -> DiscordHandler ()
 removeFromGroup config server guildId targetUserId auth = do

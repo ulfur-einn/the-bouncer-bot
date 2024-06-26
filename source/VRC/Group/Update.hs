@@ -2,7 +2,7 @@
 
 module VRC.Group.Update (updateMembers, updateOnlineMembers, updateAll, updateChannels, forceUpdate, forceUpdateRespond, aSyncUpdate) where
 
-import VRC.Group.GetGroup (getGroup)
+import VRC.Group.Group
 import Config
 import Network.HTTP.Client.Conduit
 import Tools
@@ -11,8 +11,7 @@ import VRC.Login (refreshCookies)
 import Data.IORef (readIORef, writeIORef, IORef)
 import Discord
 import Control.Monad.IO.Class
-import VRC.Group.GetInstance
-import Channel.Channels
+import Channels
 import qualified Discord.Types as DT
 import Data.Foldable
 import Discord.Interactions
