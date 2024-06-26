@@ -1,0 +1,21 @@
+{
+    "authToken": "",
+    "applicationId": "",
+    "userAgent": "",
+    "username": "",
+    "password": "",
+    "authSecret": "",
+    "usrId": "",
+    "servers": {
+        "55555GUILD-ID-HERE5555": {
+            "guildName": "",
+            "displayMembersChannel": "",
+            "displayOnlineMembersChannel": "",
+            "botOutputChannel": "",
+            "instancesCategory": "",
+            "vrcGroupId": "",
+            "verifiedRole": "",
+            "memberRole": ""
+        }
+    }
+}   
