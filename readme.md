@@ -107,4 +107,4 @@ They should for the most part be self-explanatory, but here is a brief explanati
     * `verifiedRole` - The ID of the Role that will be granted to users who use the bot to verify their age.
     * `memberRole` - The ID of the Role that will be granted to users who use the bot to invite themselves to the VRChat Group.
  
-And after you fill all of those in, save your changes and rename the file to configGlobal.json 
+And after you fill all of those in, save your changes and rename the file to configGlobal.json and create a folder called "Guilds" next to "source".
