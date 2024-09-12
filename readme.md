@@ -61,7 +61,7 @@ The Bot is also set to update the display every 30 minutes, and there is a comma
 ### configGlobal.example
 
 The configGlobal.example file is a json file used to store the Bot's Token, Application ID, and the IDs of the Discord Servers the Bot will be operating in.
-There should be a configGlobal.json file in the top level of the project directory if you are building from source, or in the same directory as the executable if you are using a release.
+There should be the configGlobal.example file in the top level of the project directory if you are building from source, or in the same directory as the executable if you are using a release.
 
 The file should look like this:
 ```json
