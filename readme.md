@@ -58,9 +58,9 @@ The Bot is also set to update the display every 30 minutes, and there is a comma
     2. Set up the configGlobal.json file. (See below)
     3. Run `cabal build` in the project directory.
 
-### configGlobal.json
+### configGlobal.example
 
-The configGlobal.json file is used to store the Bot's Token, Application ID, and the IDs of the Discord Servers the Bot will be operating in.
+The configGlobal.example file is a json file used to store the Bot's Token, Application ID, and the IDs of the Discord Servers the Bot will be operating in.
 There should be a configGlobal.json file in the top level of the project directory if you are building from source, or in the same directory as the executable if you are using a release.
 
 The file should look like this:
@@ -106,3 +106,5 @@ They should for the most part be self-explanatory, but here is a brief explanati
     * `vrcGroupId` - The ID of the VRChat Group.
     * `verifiedRole` - The ID of the Role that will be granted to users who use the bot to verify their age.
     * `memberRole` - The ID of the Role that will be granted to users who use the bot to invite themselves to the VRChat Group.
+ 
+And after you fill all of those in, save your changes and rename the file to configGlobal.json 
