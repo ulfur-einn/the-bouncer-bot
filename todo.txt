@@ -2,3 +2,5 @@ add a happy birthday response for users
 
 getGroupInstances, getGroup, doesnt check for a bad response code (error)
 /update returns nothing on fail
+
+Add an alert for birthdays with 01.01 and older than 1980
