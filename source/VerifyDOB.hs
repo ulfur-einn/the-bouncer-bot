@@ -1,4 +1,5 @@
 {-# OPTIONS_GHC -Wno-name-shadowing #-}
+{-# LANGUAGE DoAndIfThenElse #-}
 
 module VerifyDOB (verifyDOBCreate, verifyDOBRespond) where
     
@@ -109,25 +110,73 @@ verifyDOBRespond
                         let plusDOB = addGregorianYearsClip 18 dob
                         if today > plusDOB
                             then do
-                                let newUser = User {
-                                    userId = userId,
-                                    userName = usrName,
-                                    userGlobalName = userGlobalName,
-                                    memberNick = memberNick,
-                                    memberJoinedAt = memberJoinedAt,
-                                    dateOfBirth = dob,
-                                    dateOfRegistry = currentTime,
-                                    vrcUUId = Nothing,
-                                    isInDiscord = True}
-                                let
-                                    f :: User -> Bool
-                                    f (User {userId = uid}) = userId == uid
-                                if not $ any f oldUsers
+                                let (dobYear, dobMonth, dobDay) = toGregorian dob
+                                if dobYear < 1980
                                     then do
-                                        let newUsers = oldUsers ++ [newUser]
-                                        liftIO (encodeFile (id2FilePath guildId) newUsers)
-                                        addRole guildId userId (verifiedRole server)
-                                        sendResponse interactionId interactionToken "Your date of birth has been successfully recorded!"
-                                    else sendResponse interactionId interactionToken "You have already entered your date of birth! Contact a moderator to have it changed."
+                                        postToBotChannel (botOutputChannel server) (usrName <> " has a DOB later than 1980.")
+                                        let newUser = User {
+                                            userId = userId,
+                                            userName = usrName,
+                                            userGlobalName = userGlobalName,
+                                            memberNick = memberNick,
+                                            memberJoinedAt = memberJoinedAt,
+                                            dateOfBirth = dob,
+                                            dateOfRegistry = currentTime,
+                                            vrcUUId = Nothing,
+                                            isInDiscord = True}
+                                        let
+                                            f :: User -> Bool
+                                            f (User {userId = uid}) = userId == uid
+                                        if not $ any f oldUsers
+                                            then do
+                                                let newUsers = oldUsers ++ [newUser]
+                                                liftIO (encodeFile (id2FilePath guildId) newUsers)
+                                                addRole guildId userId (verifiedRole server)
+                                                sendResponse interactionId interactionToken "Your date of birth has been successfully recorded!"
+                                        else sendResponse interactionId interactionToken "You have already entered your date of birth! Contact a moderator to have it changed."
+                                else if dobMonth == January && dobDay == 01
+                                    then do
+                                        postToBotChannel (botOutputChannel server) (usrName <> " has a DOB with January 1st.")
+                                        let newUser = User {
+                                            userId = userId,
+                                            userName = usrName,
+                                            userGlobalName = userGlobalName,
+                                            memberNick = memberNick,
+                                            memberJoinedAt = memberJoinedAt,
+                                            dateOfBirth = dob,
+                                            dateOfRegistry = currentTime,
+                                            vrcUUId = Nothing,
+                                            isInDiscord = True}
+                                        let
+                                            f :: User -> Bool
+                                            f (User {userId = uid}) = userId == uid
+                                        if not $ any f oldUsers
+                                            then do
+                                                let newUsers = oldUsers ++ [newUser]
+                                                liftIO (encodeFile (id2FilePath guildId) newUsers)
+                                                addRole guildId userId (verifiedRole server)
+                                                sendResponse interactionId interactionToken "Your date of birth has been successfully recorded!"
+                                        else sendResponse interactionId interactionToken "You have already entered your date of birth! Contact a moderator to have it changed."
+                                else do
+                                    let newUser = User {
+                                        userId = userId,
+                                        userName = usrName,
+                                        userGlobalName = userGlobalName,
+                                        memberNick = memberNick,
+                                        memberJoinedAt = memberJoinedAt,
+                                        dateOfBirth = dob,
+                                        dateOfRegistry = currentTime,
+                                        vrcUUId = Nothing,
+                                        isInDiscord = True}
+                                    let
+                                        f :: User -> Bool
+                                        f (User {userId = uid}) = userId == uid
+                                    if not $ any f oldUsers
+                                        then do
+                                            let newUsers = oldUsers ++ [newUser]
+                                            liftIO (encodeFile (id2FilePath guildId) newUsers)
+                                            addRole guildId userId (verifiedRole server)
+                                            sendResponse interactionId interactionToken "Your date of birth has been successfully recorded!"
+                                        else sendResponse interactionId interactionToken "You have already entered your date of birth! Contact a moderator to have it changed."
                             else sendResponse interactionId interactionToken "Your date of birth is less than 18 years old."
                     Nothing -> sendResponse interactionId interactionToken "Your date of birth is invalid."
